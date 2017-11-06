@@ -1,0 +1,111 @@
+body.black {
+	background-color : black;
+	color : white;
+	transition : background-color 5s, color 5s;
+}
+
+.mainTab {
+	display : flex;
+	width : 100%;
+	flex-direction : column;
+	align-items : center;
+}
+
+.button.addGold {
+	cursor : pointer;
+	margin-top : 10vmin;
+	padding : 2vmin;
+	background-color : gold;
+	font-size : 300%;
+	transition : background-color 0.5s, opacity 5s;
+}
+
+.button:hover {
+	background-color : yellow;
+}
+
+.resources {
+	font-size : 200%;
+	display : flex;
+	padding : 2vmin;
+	flex-direction : column;
+}
+
+.resources .display {
+	display : flex;
+	align-items : center;
+	justify-content : center;
+}
+
+.resources .display .name {
+	font-weight : bold;
+	padding-right : 1vmin;
+}
+
+.resources .display .name::after {
+	content : ":";	
+}
+
+.shop {
+	display : flex;
+	flex-direction : row;
+	width : 70vmin;
+	align-items : center;
+	justify-content : center;
+	flex-wrap : wrap;
+}
+
+.shop .button {
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	justify-content : center;
+	padding : 1vmin 2vmin;
+	margin : 1vmin;
+	width : 10vmin;
+	background-color : gold;
+	color : black;
+	transition : background-color 0.5s, opacity 5s;
+}
+
+.shop .button:hover {
+	background-color : yellow;
+}
+
+.shop .hidden, .shop .bought {
+	display : none;
+}
+
+.shop.upgrades .button {
+	width : 40vmin;
+}
+
+.shop .button.big {
+	width : 58vmin;
+}
+
+body.black .button.addGold {
+	opacity : 0;
+	pointer-events : none;
+}
+
+body.black .button {
+	background-color : transparent;
+	color : #333333;
+	pointer-events : none;
+}
+
+.thanks {
+	pointer-events : none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select : none;
+	color : #dddddd;
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	justify-content : center;
+	font-size : 200%;
+	padding-top : 10vmin;
+}

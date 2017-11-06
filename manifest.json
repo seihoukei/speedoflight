@@ -1,0 +1,11 @@
+{
+	"short_name": "Speed of light",
+	"name": "Speed of light",
+	"icons": [{
+		"src": "icon.png",
+		"type": "image/png",
+		"sizes": "128x128"
+	}],
+	"start_url": "index.html",
+	"display": "standalone"
+}
