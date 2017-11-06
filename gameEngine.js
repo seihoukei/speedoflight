@@ -340,13 +340,6 @@ class Game {
 		
 		console.log("unlocking", name)
 		
-		switch (name) {
-			case "plan" : 
-				for (let button of this.gui.dialogs.tabs.get("plan").displayButtons)
-					button.reveal()
-				break
-		}
-		
 		this.unlocks.add(name)
 		return true
 	}	
@@ -477,8 +470,8 @@ class GameObject {
 	updateDisplays(forced) {
 		for (let display of this.displays)
 			if (forced || display.styles || this.value != this.oldValue || this.changeSpeed != this.oldChange) {
-				if (display.updateTooltip && this.value != this.oldValue)
-					display.shouldUpdateTooltip = true
+				if (display.updateTooltip && (this.value != this.oldValue))
+					display.shouldUpdateTooltip |= true 
 				this.game.gui.updatesPlanned.add(display)
 			}
 	}
@@ -558,9 +551,7 @@ class GameAction extends Resource {
 	}
 	
 	update(forced) {
-		if (this.seen || forced) {
-			this.canAfford = this.game.checkResources(this.calculatedCost) && this.game.checkResources(this.calculatedRequirements)
-		}
+		this.canAfford = this.game.checkResources(this.calculatedCost) && this.game.checkResources(this.calculatedRequirements)
 		super.update()
 	}
 	

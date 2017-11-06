@@ -13,7 +13,7 @@ body.black {
 
 .button.addGold {
 	cursor : pointer;
-	margin-top : 10vmin;
+	margin : 10vmin 0vmin 0vmin;
 	padding : 2vmin;
 	background-color : gold;
 	font-size : 300%;
@@ -28,6 +28,7 @@ body.black {
 	font-size : 200%;
 	display : flex;
 	padding : 2vmin;
+	padding-top : 5vmin;
 	flex-direction : column;
 }
 
@@ -107,5 +108,5 @@ body.black .button {
 	align-items : center;
 	justify-content : center;
 	font-size : 200%;
-	padding-top : 10vmin;
+	padding-top : 7vmin;
 }

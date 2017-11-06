@@ -682,12 +682,11 @@ class StoreDisplay extends ResourceDisplay {
 	}
 	
 	updateTooltip(forced) {
-		this.shouldUpdateTooltip = false
 		
 		if (!forced && this.game.gui.tooltip.resource != this.resource)
 			return
 		
-		this.game.gui.tooltip.resource = this.resource
+		this.shouldUpdateTooltip = false
 		
 		let tooltipData = [{
 			class : TextFragment,
@@ -738,12 +737,14 @@ class StoreDisplay extends ResourceDisplay {
 		}
 		
 		this.game.gui.tooltip.build(tooltipData)
+		this.game.gui.tooltip.resource = this.resource
 	}
 	
 	update(forced) {
 		super.update(forced)
-		if (this.shouldUpdateTooltip)
+		if (this.shouldUpdateTooltip) {
 			this.updateTooltip()
+		}
 	}
 	
 	onReveal() {
