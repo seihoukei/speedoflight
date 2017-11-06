@@ -277,10 +277,15 @@ class Tooltip {
 	constructor (...data) {
 		Object.assign(this, ...data)
 		this.container.appendChild(this.dvDisplay = createElement("div", {class : `tooltip hidden`}))
+		this.shown = false
+		this.timeOut = 0
 		this.elements = []
+		this.posX = 0
+		this.posY = 0
 	}	
 	
 	build (data) {
+//		this.hide()
 		this.destroy()
 		
 //		console.log(data)
@@ -291,7 +296,19 @@ class Tooltip {
 			})
 			this.elements.push(element)
 		}
-		this.show()
+//		this.show()
+	}
+	
+	target (x,y) {
+		if (this.timeOut)
+			clearTimeout(this.timeOut)
+
+		this.posX = x
+		this.posY = y
+		if (!this.shown)
+			this.timeOut = setTimeout(() => {
+				this.show()
+			}, 500)
 	}
 	
 	moveTo (x, y) {
@@ -300,10 +317,11 @@ class Tooltip {
 		let width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
 		let height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
 		
-		x = x * (width - w) / width
+		//x = x * (width - w) / width
+		x = (x < width - w - 10 ? x + 5 : x - (w + 5))
 		y = (y < height / 2 ? y + 5 : y - (h + 5))
-		
-//		x = Math.max(0,Math.min(x, width-w))
+				
+		x = Math.max(0,Math.min(x, width-w))
 		y = Math.max(0,Math.min(y, height-h))
 		
 		this.dvDisplay.style.left = `${x}px`
@@ -311,15 +329,20 @@ class Tooltip {
 	}
 	
 	hide() {
+		this.shown = false
 		this.dvDisplay.classList.add("hidden")
+		if (this.timeOut)
+			clearTimeout(this.timeOut)
 	}
 	
 	show() {
+		this.shown = true
 		this.dvDisplay.classList.remove("hidden")
+		this.moveTo(this.posX, this.posY)
 	}
 	
 	destroy() {
-		this.hide()
+//		this.hide()
 		this.resource = null
 		let element
 		while (element = this.elements.pop()) {
@@ -663,10 +686,11 @@ class StoreDisplay extends ResourceDisplay {
 		}
 		
 		this.dvDisplay.onmousemove = (event) => {
-			this.game.gui.tooltip.moveTo(event.clientX, event.clientY)
+			this.game.gui.tooltip.target(event.clientX, event.clientY)
 		}
 		
 		this.dvDisplay.onmouseout = (event) => {
+			this.game.gui.tooltip.hide()
 			this.game.gui.tooltip.destroy()
 		}
 		
